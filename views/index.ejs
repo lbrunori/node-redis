@@ -5,16 +5,65 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Tasks manager</title>
+    
+    <style>
+        .del:checked + span {
+            color: red;
+        }    
+
+        .task-list {
+            list-style: none;
+        }
+    </style>
 </head>
 
-<body>
-    <h4><%= title %></h4>
-    <ul>
-        <% tasks.forEach(function(task){ %>
-            <li><%= task %></li>
-        <% }) %>
-    </ul>
-</body>
+<body>    
+    <form method="post" action="/task/add">
+        <label>Add task</label>
+        <input type="text" name="task" placeholder="Add task">
+        <input type="submit" value="Submit">
+    </form>
 
+    <h4><%= title %></h4>
+
+    <form method="post" action="/task/delete">
+        <ul>
+            <% tasks.forEach(function(task){ %>
+                <li>
+                    <label>
+                        <input type="checkbox" name="task" class="del" value="<%= task %>">                    
+                    <span><%= task %></span>
+                    </label>
+                </li>
+            <% }) %>
+        </ul>
+        <input type="submit" value="Remove">
+    </form>   
+    
+    <h3>Next Business Call</h3>
+    <p>Name: <%= call.name %></p>
+    <p>Company: <%= call.company %></p>
+    <p>Phone: <%= call.phone %></p>
+    <p>Time: <%= call.time %></p>
+
+    <h3>Edit Next Call</h3>
+
+    <form method="post" action="/call/add">
+        <label>Contact Name</label><br>
+        <input type="text" name="name" placeholder="Task Name">
+        <br><br>
+        <label>Company</label><br>
+        <input type="text" name="company" placeholder="Company">
+        <br><br>
+        <label>Phone</label><br>
+        <input type="text" name="phone" placeholder="Phone">
+        <br><br>
+        <label>Day & Time</label><br>
+        <input type="text" name="time" placeholder="Time">
+        <br><br>
+        <input type="submit" value="Submit">
+    </form>
+</body>
 </html>
+
